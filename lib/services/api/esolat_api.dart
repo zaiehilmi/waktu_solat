@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:waktu_solat/utils/constant/eSolat.dart';
-import 'package:waktu_solat/utils/interface/koordinat.dart';
 
 const eSolatEndpoint =
     'https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&';

@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:waktu_solat/utils/interface/koordinat.dart';
+import 'package:waktu_solat/utils/class/koordinat.dart';
 
 const arahKiblatEndpoint = 'https://api.aladhan.com/v1/qibla/';
 
