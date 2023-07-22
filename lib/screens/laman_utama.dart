@@ -7,8 +7,10 @@ import 'package:waktu_solat/theme/assets.dart';
 import 'package:waktu_solat/theme/color.dart';
 import 'package:waktu_solat/theme/spacing.dart';
 import 'package:waktu_solat/theme/dimension.dart';
-import 'package:waktu_solat/utils/constant/nama_skrin.dart';
-import 'package:waktu_solat/widgets/Screen.dart';
+import 'package:waktu_solat/utils/constant/tag_animasi.dart';
+import 'package:waktu_solat/utils/navigation/nama_skrin.dart';
+import 'package:waktu_solat/widgets/kotak_gradient.dart';
+import 'package:waktu_solat/widgets/screen.dart';
 
 class LamanUtama extends ConsumerWidget {
   const LamanUtama({super.key});
@@ -34,88 +36,63 @@ class LamanUtama extends ConsumerWidget {
               onTap: () => context.go(NamaSkrin.waktuSolat),
               child: Stack(
                 children: [
-                  kotak(context),
+                  Hero(
+                    tag: TagAnimasi.kotakWaktuSolat,
+                    child: KotakGradient(),
+                  ),
                   Positioned(
                     top: 10,
                     left: 10,
-                    child: Lottie.asset(
-                      AsetLottie.lelakiGunaTeleskop,
-                      width: dimension.width / 1.8,
-                      fit: BoxFit.contain,
+                    child: Hero(
+                      tag: TagAnimasi.lottieTeropong,
+                      child: Lottie.asset(
+                        AsetLottie.lelakiGunaTeleskop,
+                        width: dimension.width / 1.8,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                   Positioned(
                     bottom: Spacing.xxl,
                     right: Spacing.xxxl,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Rujuk',
-                          style: ThemeData.dark(useMaterial3: true)
-                              .textTheme
-                              .labelSmall!
-                              .copyWith(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                              ),
-                        ),
-                        Text(
-                          'Waktu Solat',
-                          style: ThemeData.dark(useMaterial3: true)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(fontSize: 40),
-                        ),
-                      ],
+                    child: Hero(
+                      tag: TagAnimasi.teksWaktuSolat,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Rujuk',
+                            style: ThemeData.dark(useMaterial3: true)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                          ),
+                          Text(
+                            'Waktu Solat',
+                            style: ThemeData.dark(useMaterial3: true)
+                                .textTheme
+                                .displayLarge!
+                                .copyWith(fontSize: 40),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            kotak(context,
-                onTap: () => print('lala'),
-                child: kandunganKotakKiblat(context))
+            KotakGradient(
+              onTap: () => print('lala'),
+              child: kandunganKotakKiblat(context),
+            )
           ],
         ),
       ),
     );
   }
-}
-
-Widget kotak(BuildContext context, {Widget? child, Function()? onTap}) {
-  final dimension = DeviceDimension(context);
-
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: dimension.width / 1.3,
-      height: dimension.height / 3.5,
-      margin: EdgeInsets.all(Spacing.xxl),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(CustomColors.bighead.color_1),
-            Color(CustomColors.bighead.color_2),
-          ],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0xff4b134f),
-            spreadRadius: 0,
-            blurRadius: 25,
-            offset: Offset(0, 4),
-          ),
-        ],
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
-      child: (child),
-    ),
-  );
 }
 
 Widget kandunganKotakKiblat(BuildContext context) {
@@ -124,12 +101,15 @@ Widget kandunganKotakKiblat(BuildContext context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      Lottie.asset(
-        AsetLottie.kompas,
-        width: dimension.width / 2.4,
-        fit: BoxFit.contain,
+      Hero(
+        tag: TagAnimasi.lottieKompas,
+        child: Lottie.asset(
+          AsetLottie.kompas,
+          width: dimension.width / 2.4,
+          fit: BoxFit.contain,
+        ),
       ),
-      teksLabelKiblat()
+      Hero(tag: TagAnimasi.teksKiblat, child: teksLabelKiblat())
     ],
   );
 }
