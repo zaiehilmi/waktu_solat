@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Screen extends ConsumerWidget {
@@ -8,7 +9,7 @@ class Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => CupertinoPageScaffold(
-        backgroundColor: CupertinoColors.systemBackground,
+        backgroundColor: ThemeData.dark(useMaterial3: true).primaryColor,
         child: SafeArea(
           child: body,
         ),
