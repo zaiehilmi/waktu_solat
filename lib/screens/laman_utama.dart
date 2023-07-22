@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:waktu_solat/theme/assets.dart';
 
-import 'package:waktu_solat/theme/color.dart';
 import 'package:waktu_solat/theme/spacing.dart';
 import 'package:waktu_solat/theme/dimension.dart';
 import 'package:waktu_solat/utils/constant/tag_animasi.dart';
@@ -55,30 +54,30 @@ class LamanUtama extends ConsumerWidget {
                   Positioned(
                     bottom: Spacing.xxl,
                     right: Spacing.xxxl,
-                    child: Hero(
-                      tag: TagAnimasi.teksWaktuSolat,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Rujuk',
-                            style: ThemeData.dark(useMaterial3: true)
-                                .textTheme
-                                .labelSmall!
-                                .copyWith(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                          Text(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Rujuk',
+                          style: ThemeData.dark(useMaterial3: true)
+                              .textTheme
+                              .labelSmall!
+                              .copyWith(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                        Hero(
+                          tag: TagAnimasi.teksWaktuSolat,
+                          child: Text(
                             'Waktu Solat',
                             style: ThemeData.dark(useMaterial3: true)
                                 .textTheme
                                 .displayLarge!
                                 .copyWith(fontSize: 40),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

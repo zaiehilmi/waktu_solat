@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:waktu_solat/utils/navigation/router.dart';
 
-import 'screens/laman_utama.dart';
-
 void main() {
   runApp(const ProviderScope(child: WaktuSolat()));
 }
