@@ -1,6 +1,6 @@
 class Koordinat {
-  double? latitud;
-  double? longitud;
+  double latitud;
+  double longitud;
 
-  Koordinat({this.latitud, this.longitud});
+  Koordinat({required this.latitud, required this.longitud});
 }

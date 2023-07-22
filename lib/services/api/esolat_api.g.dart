@@ -7,7 +7,7 @@ part of 'esolat_api.dart';
 // **************************************************************************
 
 String _$getWaktuSolatHariIniHash() =>
-    r'b534dc3960900a643c2bb1615e81e0f3e23cc9ad';
+    r'1bd6824e75f563a8aab6953a94f9f0bea00dda98';
 
 /// Copied from Dart SDK
 class _SystemHash {

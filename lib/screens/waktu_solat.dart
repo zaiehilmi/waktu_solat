@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:waktu_solat/services/api/esolat_api.dart';
+import 'package:waktu_solat/services/kedudukan.dart';
 import 'package:waktu_solat/theme/assets.dart';
 import 'package:waktu_solat/theme/spacing.dart';
 import 'package:waktu_solat/utils/class/esolat.dart';
 import 'package:waktu_solat/utils/constant/eSolat.dart';
 import 'package:waktu_solat/utils/constant/tag_animasi.dart';
+import 'package:waktu_solat/utils/jarak_terpendek.dart';
 import 'package:waktu_solat/utils/navigation/nama_skrin.dart';
 import 'package:waktu_solat/widgets/kotak_gradient.dart';
 import 'package:waktu_solat/widgets/screen.dart';
@@ -17,6 +19,9 @@ class JadualWaktuSolat extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final koordinat = ref.watch(tentukanKedudukanProvider);
+    final zonWaktuSolat = ref.watch(cariZonTerdekatProvider);
+
     final waktuSolat = ref.watch(getWaktuSolatHariIniProvider(
       tempohJadual: TempohJadual.week,
       zonWaktuSolat: ZonWaktuSolat.JHR02,
