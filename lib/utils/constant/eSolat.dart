@@ -59,4 +59,6 @@ enum ZonWaktuSolat {
   TRG04,
   WLY01,
   WLY02,
+
+  TIDAK_DIKETAHUI
 }

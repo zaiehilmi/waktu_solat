@@ -1,27 +1,27 @@
 import 'package:waktu_solat/utils/format_jam.dart';
 
 class ESolat {
-  String hari;
-  String hijrah;
-  String masihi;
+  String? hari;
+  String? hijrah;
+  String? masihi;
 
-  String subuh;
-  String syuruk;
-  String zohor;
-  String asar;
-  String maghrib;
-  String isyak;
+  String? subuh;
+  String? syuruk;
+  String? zohor;
+  String? asar;
+  String? maghrib;
+  String? isyak;
 
   ESolat({
-    required this.hari,
-    required this.hijrah,
-    required this.masihi,
-    required this.subuh,
-    required this.syuruk,
-    required this.zohor,
-    required this.asar,
-    required this.maghrib,
-    required this.isyak,
+    this.hari,
+    this.hijrah,
+    this.masihi,
+    this.subuh,
+    this.syuruk,
+    this.zohor,
+    this.asar,
+    this.maghrib,
+    this.isyak,
   });
 
   factory ESolat.fromJson(Map<String, dynamic> data) {

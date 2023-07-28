@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:waktu_solat/models/waktu_solat_riverpod.dart';
 import 'package:waktu_solat/theme/assets.dart';
 
 import 'package:waktu_solat/theme/spacing.dart';
@@ -17,6 +18,7 @@ class LamanUtama extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dimension = DeviceDimension(context);
+    ref.watch(kedudukanProvider);
 
     return Screen(
       body: Center(

@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:waktu_solat/services/api/esolat_api.dart';
-import 'package:waktu_solat/services/kedudukan.dart';
+import 'package:waktu_solat/models/state_provider.dart';
+import 'package:waktu_solat/models/waktu_solat_riverpod.dart';
 import 'package:waktu_solat/theme/assets.dart';
 import 'package:waktu_solat/theme/spacing.dart';
 import 'package:waktu_solat/utils/class/esolat.dart';
-import 'package:waktu_solat/utils/constant/eSolat.dart';
 import 'package:waktu_solat/utils/constant/tag_animasi.dart';
-import 'package:waktu_solat/utils/jarak_terpendek.dart';
 import 'package:waktu_solat/utils/navigation/nama_skrin.dart';
 import 'package:waktu_solat/widgets/kotak_gradient.dart';
 import 'package:waktu_solat/widgets/screen.dart';
@@ -19,13 +17,7 @@ class JadualWaktuSolat extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final koordinat = ref.watch(tentukanKedudukanProvider);
-    final zonWaktuSolat = ref.watch(cariZonTerdekatProvider);
-
-    final waktuSolat = ref.watch(getWaktuSolatHariIniProvider(
-      tempohJadual: TempohJadual.week,
-      zonWaktuSolat: ZonWaktuSolat.JHR02,
-    ));
+    ref.watch(waktuSolatProvider);
 
     return Screen(
       body: Column(
@@ -39,16 +31,57 @@ class JadualWaktuSolat extends ConsumerWidget {
               style: ThemeData.dark(useMaterial3: true).textTheme.bodyLarge,
             ),
           ),
-          waktuSolat.when(
-            data: (data) => jadualWaktuSolat(data!),
-            error: (error, trace) => Text(
-              'lala: $error$trace',
-              style: const TextStyle(fontSize: 20),
-            ),
-            loading: () => Lottie.asset(
-              AsetLottie.jamPasir,
-            ),
-          ),
+          ref.watch(jadualWaktuSolatProvider) == null
+              ? Lottie.asset(AsetLottie.jamPasir)
+              : SizedBox(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            ref.watch(namaBandarProvider) ?? 'Tidak diketahui',
+                            style: ThemeData.dark(useMaterial3: true)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                  fontSize: 18,
+                                  color: ThemeData.dark(useMaterial3: true)
+                                      .primaryTextTheme
+                                      .labelSmall!
+                                      .color,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                          ),
+                          SizedBox(width: Spacing.md),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.purple.shade100,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(3),
+                              child: Text(
+                                ref.watch(zonWaktuSolatProvider)?.name ??
+                                    'Tidak diketahui',
+                                style: ThemeData.dark(useMaterial3: true)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                        fontSize: 14,
+                                        color: Colors.purple.shade900),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 15),
+                      _jadualWaktuSolat(ref.watch(jadualWaktuSolatProvider)!),
+                    ],
+                  ),
+                ),
           GestureDetector(
             onTap: () => context.go(NamaSkrin.mula),
             child: Stack(
@@ -94,28 +127,30 @@ class JadualWaktuSolat extends ConsumerWidget {
   }
 }
 
-Widget jadualWaktuSolat(ESolat data) {
+Widget _jadualWaktuSolat(ESolat data) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: [
-      lajurJadual(),
-      lajurJadual(data: data),
+      _lajurJadual(),
+      _lajurJadual(data: data),
     ],
   );
 }
 
-Widget lajurJadual({ESolat? data}) {
+Widget _lajurJadual({ESolat? data}) {
   TextStyle gayaLabel = ThemeData.dark(useMaterial3: true)
       .textTheme
       .bodyLarge!
       .copyWith(
           fontSize: 30,
+          fontWeight: FontWeight.w700,
           color: ThemeData.dark(useMaterial3: true).secondaryHeaderColor);
 
-  TextStyle gayaData = ThemeData.dark(useMaterial3: true)
-      .primaryTextTheme
-      .bodyLarge!
-      .copyWith(fontSize: 30);
+  TextStyle gayaData =
+      ThemeData.dark(useMaterial3: true).primaryTextTheme.bodyLarge!.copyWith(
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+          );
 
   const double gap = 30;
 

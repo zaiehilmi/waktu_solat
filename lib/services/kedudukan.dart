@@ -1,12 +1,7 @@
-import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:waktu_solat/utils/class/koordinat.dart';
 
-part 'kedudukan.g.dart';
-
-@riverpod
-Future<Koordinat?> tentukanKedudukan(TentukanKedudukanRef ref) async {
+Future<Koordinat?> tentukanKedudukan() async {
   bool aksesDibenarkan;
   LocationPermission kebenaran;
 
@@ -33,8 +28,6 @@ Future<Koordinat?> tentukanKedudukan(TentukanKedudukanRef ref) async {
   kedudukan = await Geolocator.getCurrentPosition(
     desiredAccuracy: LocationAccuracy.best,
   );
-
-  debugPrint('===> latitud: ${kedudukan.latitude}');
 
   return Koordinat(
     latitud: kedudukan.latitude,
