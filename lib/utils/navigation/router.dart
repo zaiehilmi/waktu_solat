@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:waktu_solat/screens/kiblat.dart';
 import 'package:waktu_solat/screens/laman_utama.dart';
 import 'package:waktu_solat/screens/waktu_solat.dart';
 import 'package:waktu_solat/utils/navigation/nama_skrin.dart';
@@ -15,6 +16,10 @@ final penghala = GoRouter(
     GoRoute(
       path: NamaSkrin.waktuSolat,
       builder: (context, state) => const JadualWaktuSolat(),
+    ),
+    GoRoute(
+      path: NamaSkrin.kiblat,
+      builder: (context, state) => const Kiblat(),
     ),
   ],
 );

@@ -31,6 +31,7 @@ class JadualWaktuSolat extends ConsumerWidget {
               style: ThemeData.dark(useMaterial3: true).textTheme.bodyLarge,
             ),
           ),
+          const SizedBox(),
           ref.watch(jadualWaktuSolatProvider) == null
               ? Lottie.asset(AsetLottie.jamPasir)
               : SizedBox(
@@ -83,7 +84,7 @@ class JadualWaktuSolat extends ConsumerWidget {
                   ),
                 ),
           GestureDetector(
-            onTap: () => context.go(NamaSkrin.mula),
+            onTap: () => context.go(NamaSkrin.kiblat),
             child: Stack(
               children: [
                 Hero(
@@ -114,7 +115,7 @@ class JadualWaktuSolat extends ConsumerWidget {
                       style: ThemeData.dark(useMaterial3: true)
                           .textTheme
                           .displayLarge!
-                          .copyWith(fontSize: 35, fontWeight: FontWeight.w500),
+                          .copyWith(fontSize: 30, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),

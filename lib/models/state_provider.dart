@@ -10,3 +10,5 @@ final namaBandarProvider = StateProvider<String?>((ref) => null);
 final zonWaktuSolatProvider = StateProvider<ZonWaktuSolat?>((ref) => null);
 
 final jadualWaktuSolatProvider = StateProvider<ESolat?>((ref) => null);
+
+final kiblatProvider = StateProvider<double?>((ref) => null);

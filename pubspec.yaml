@@ -27,17 +27,14 @@ dependencies:
   lottie: ^2.5.0
   go_router: ^10.0.0
   flutter_riverpod: ^2.3.6
-  riverpod_annotation: ^2.1.1
   intl: ^0.18.1
   geolocator: ^9.0.2
+  smooth_compass: ^2.0.17
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  build_runner: ^2.4.6
-  riverpod_generator: ^2.2.3
-  riverpod_lint: ^1.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -53,6 +50,7 @@ flutter:
     - assets/lottie/kompas.json
     - assets/lottie/lelaki-guna-teleskop.json
     - assets/lottie/jam-pasir.json
+    - assets/image/qibla-compass.png
   # fonts:
   #   - family: Schyler
   #     fonts:
