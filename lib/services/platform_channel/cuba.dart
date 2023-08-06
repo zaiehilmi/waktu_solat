@@ -11,7 +11,7 @@ Future<void> getString() async {
     final String result = await _saluran.invokeMethod('getString');
     dariChannel = 'result dari channel $result';
   } on PlatformException catch (e) {
-    dariChannel = 'tak dapat string';
+    dariChannel = 'tak dapat string: $e';
   }
 
   print(dariChannel);
