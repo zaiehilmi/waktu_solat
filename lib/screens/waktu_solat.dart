@@ -12,12 +12,26 @@ import 'package:waktu_solat/utils/navigation/nama_skrin.dart';
 import 'package:waktu_solat/widgets/kotak_gradient.dart';
 import 'package:waktu_solat/widgets/screen.dart';
 
-class JadualWaktuSolat extends ConsumerWidget {
+class JadualWaktuSolat extends ConsumerStatefulWidget {
   const JadualWaktuSolat({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(waktuSolatProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _JadualWaktuSolatState();
+}
+
+class _JadualWaktuSolatState extends ConsumerState<JadualWaktuSolat> {
+  @override
+  void initState() {
+    ref.read(waktuSolatProvider);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ESolat? jadualWaktuSolat = ref.watch(jadualWaktuSolatProvider);
+    String? namaBandar = ref.watch(namaBandarProvider);
 
     return Screen(
       body: Column(
@@ -32,7 +46,7 @@ class JadualWaktuSolat extends ConsumerWidget {
             ),
           ),
           const SizedBox(),
-          ref.watch(jadualWaktuSolatProvider) == null
+          jadualWaktuSolat == null
               ? Lottie.asset(AsetLottie.jamPasir)
               : SizedBox(
                   child: Column(
@@ -43,7 +57,7 @@ class JadualWaktuSolat extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            ref.watch(namaBandarProvider) ?? 'Tidak diketahui',
+                            namaBandar ?? 'Tidak diketahui',
                             style: ThemeData.dark(useMaterial3: true)
                                 .textTheme
                                 .bodyLarge!
@@ -79,7 +93,7 @@ class JadualWaktuSolat extends ConsumerWidget {
                         ],
                       ),
                       const SizedBox(height: 15),
-                      _jadualWaktuSolat(ref.watch(jadualWaktuSolatProvider)!),
+                      _jadualWaktuSolat(jadualWaktuSolat),
                     ],
                   ),
                 ),

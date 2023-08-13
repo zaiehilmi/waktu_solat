@@ -10,18 +10,30 @@ import 'package:waktu_solat/theme/dimension.dart';
 import 'package:waktu_solat/theme/spacing.dart';
 import 'package:waktu_solat/utils/constant/tag_animasi.dart';
 import 'package:waktu_solat/utils/navigation/nama_skrin.dart';
+import 'package:waktu_solat/widgets/kompas_kiblat.dart';
 import 'package:waktu_solat/widgets/kotak_gradient.dart';
 import 'package:waktu_solat/widgets/screen.dart';
 
-class Kiblat extends ConsumerWidget {
+class Kiblat extends ConsumerStatefulWidget {
   const Kiblat({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final dimension = DeviceDimension(context);
-    ref.watch(getKiblatProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _KiblatState();
+}
+
+class _KiblatState extends ConsumerState<Kiblat> {
+  @override
+  void initState() {
+    ref.read(getKiblatProvider);
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final width = DeviceDimension(context).width;
     double? arahKiblat = ref.watch(kiblatProvider);
-    debugPrint('arah kiblat dalam screen: $arahKiblat');
+    debugPrint('arah kiblat dalam screen: $arahKiblat, $width');
 
     return Screen(
       body: Column(
@@ -35,50 +47,18 @@ class Kiblat extends ConsumerWidget {
               style: ThemeData.dark(useMaterial3: true).textTheme.bodyLarge,
             ),
           ),
-          SmoothCompass(
-            rotationSpeed: 500,
-            height: 300,
-            width: 300,
-            compassBuilder: (context, snapshot, preloadCompassImage) =>
-                SizedBox(
-              height: 300,
-              width: 300,
-              child: AnimatedRotation(
-                duration: const Duration(milliseconds: 800),
-                turns: snapshot?.data?.turns ?? 0,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: preloadCompassImage,
-                    ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: AnimatedRotation(
-                        duration: const Duration(milliseconds: 500),
-                        turns: arahKiblat ?? 0 / 360,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: const VerticalDivider(
-                            color: Colors.grey,
-                            thickness: 5,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
+          (arahKiblat == null)
+              ? Lottie.asset(AsetLottie.jamPasir)
+              : SmoothCompass(
+                  rotationSpeed: 500,
+                  height: 300,
+                  width: 300,
+                  compassBuilder: (context, snapshot, preloadCompassImage) =>
+                      KompasKiblat(
+                        snapshot: snapshot,
+                        preloadCompassImage: preloadCompassImage,
+                        arahKiblat: arahKiblat,
+                      )),
 
           // butang waktu solat
           GestureDetector(
@@ -113,7 +93,9 @@ class Kiblat extends ConsumerWidget {
                       style: ThemeData.dark(useMaterial3: true)
                           .textTheme
                           .displayLarge!
-                          .copyWith(fontSize: 30, fontWeight: FontWeight.w500),
+                          .copyWith(
+                              fontSize: (width < 400) ? 25 : 30,
+                              fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
